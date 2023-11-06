@@ -33,26 +33,24 @@ func main() {
 	fmt.Print("Результат: \n", result)
 }
 
-func findKthLargest(mas []int, k int) int {
-
-	var temp int
-	var lengh = (len(mas))
-	if k <= lengh {
-		var i = k - 1
-		temp = mas[k-1]
-		for {
-			if temp < mas[i] {
-				temp = mas[i]
-			}
-			i = i + k
-			if i > lengh-1 {
-				break
+func bubbleSort(mas []int) {
+	len := len(mas)
+	for i := 0; i < len-1; i++ {
+		for j := 0; j < len-i-1; j++ {
+			if mas[j] > mas[j+1] {
+				mas[j], mas[j+1] = mas[j+1], mas[j]
 			}
 		}
-	} else {
-		temp = 0
 	}
+}
 
-	return temp
+func findKthLargest(mas []int, k int) int {
 
+	bubbleSort(mas)
+	var lengh = (len(mas))
+	if k <= lengh {
+		return mas[lengh-k]
+	} else {
+		return 0
+	}
 }
